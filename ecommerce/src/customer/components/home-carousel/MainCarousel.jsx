@@ -12,7 +12,7 @@ const responsive = {
 
 
 const MainCarousel = () => {
-     const items = mainCarouselData.map((img)=> <img className='cursor-pointer' role='presentation' src={img.image} alt=''/>)
+     const items = mainCarouselData.map((img)=> <img className='cursor-pointer -z-10' role='presentation' src={img.image} alt=''/>)
 
   return (
     <AliceCarousel
