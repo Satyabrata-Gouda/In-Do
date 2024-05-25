@@ -5,16 +5,19 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useLocation } from "react-router-dom";
+import DeliveryAddressForm from "./DeliveryAddressForm";
+import OrderSummary from "./OrderSummary";
 
-const steps = [
-  "Login",
-  "Delivery Address",
-  "Order Summary",
-  "Payment"
-];
+const steps = ["Login", "Delivery Address", "Order Summary", "Payment"];
 
 export default function CheckOut() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const location = useLocation();
+  const querySearch = new URLSearchParams(location.search);
+
+  const step =querySearch.get("step")
+
   //const [skipped, setSkipped] = React.useState(new Set());
 
   //   const isStepOptional = (step) => {
@@ -62,7 +65,7 @@ export default function CheckOut() {
   return (
     <div className="px10 lg:px-20">
       <Box sx={{ width: "100%" }}>
-        <Stepper activeStep={activeStep}>
+        <Stepper activeStep={step}>
           {steps.map((label, index) => {
             const stepProps = {};
             const labelProps = {};
@@ -93,7 +96,7 @@ export default function CheckOut() {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+            {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
                 color="inherit"
@@ -103,17 +106,20 @@ export default function CheckOut() {
               >
                 Back
               </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
+              {/* <Box sx={{ flex: "1 1 auto" }} /> */}
               {/* {isStepOptional(activeStep) && (
               <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
                 Skip
               </Button>
             )} */}
 
-              <Button onClick={handleNext}>
+              {/* <Button onClick={handleNext}>
                 {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button>
+              </Button> */}
             </Box>
+            <div className="mt-10">
+              {step == 2?<DeliveryAddressForm/>:<OrderSummary/>}
+            </div>
           </React.Fragment>
         )}
       </Box>

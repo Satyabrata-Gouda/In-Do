@@ -6,8 +6,7 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-
-// import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 // import { navigation } from "../../../config/navigationMenu";
 // import AuthModal from "../Auth/AuthModal";
@@ -24,7 +23,7 @@ function classNames(...classes) {
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
   // const { auth, cart } = useSelector((store) => store);
   const [openAuthModal, setOpenAuthModal] = useState(false);
@@ -55,7 +54,7 @@ export default function Navigation() {
   };
 
   const handleCategoryClick = (category, section, item, close) => {
-    // navigate(`/${category.id}/${section.id}/${item.id}`);
+     navigate(`/${category.id}/${section.id}/${item.id}`);
     close();
   };
 
@@ -447,11 +446,14 @@ export default function Navigation() {
                         }}
                       >
                         {/* onClick={handleMyOrderClick} */}
-                        <MenuItem>
+                        <MenuItem onClick={handleCloseUserMenu}>
+                          My Profile
+                        </MenuItem>
+                        <MenuItem onClick={()=> navigate('/account/order')}>
                           {/* {auth.user?.role === "ROLE_ADMIN"
                             ? "Admin Dashboard"
                             : "My Orders"} */}
-                          My Order
+                          My Orders
                         </MenuItem>
                         {/* onClick={handleLogout} */}
                         <MenuItem>Logout</MenuItem>
